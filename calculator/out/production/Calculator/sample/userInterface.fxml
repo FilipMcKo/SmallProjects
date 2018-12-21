@@ -10,13 +10,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="285.0" prefWidth="210.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#processNumpadNr" prefHeight="300.0" prefWidth="210.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <children>
-        <VBox layoutX="55.0" layoutY="14.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox layoutX="55.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="210.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <StackPane prefHeight="66.0" prefWidth="210.0">
                     <children>
-                        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#6f5e6f00" height="50.0" stroke="BLACK" strokeType="INSIDE" width="200.0">
+                        <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#6f5e6f00" height="70.0" nodeOrientation="LEFT_TO_RIGHT" stroke="BLACK" width="200.0">
                             <StackPane.margin>
                                 <Insets bottom="5.0" top="10.0" />
                             </StackPane.margin>
@@ -60,20 +60,20 @@
                         <Insets left="5.0" right="5.0" top="5.0" />
                     </VBox.margin>
                <children>
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="7" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="8" GridPane.columnIndex="1" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="9" GridPane.columnIndex="2" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="7" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="8" GridPane.columnIndex="1" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="9" GridPane.columnIndex="2" />
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processOperator" prefHeight="40.0" prefWidth="50.0" text="/" GridPane.columnIndex="3" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="4" GridPane.rowIndex="1" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="4" GridPane.rowIndex="1" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processOperator" prefHeight="40.0" prefWidth="50.0" text="X" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="1" GridPane.rowIndex="2" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="1" GridPane.rowIndex="2" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="2" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="3" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processOperator" prefHeight="40.0" prefWidth="50.0" text="-" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="," GridPane.rowIndex="3" />
-                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumpad" prefHeight="40.0" prefWidth="50.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="." GridPane.rowIndex="3" />
+                  <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processNumclick" prefHeight="40.0" prefWidth="50.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processOperator" prefHeight="40.0" prefWidth="50.0" text="=" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="40.0" minWidth="50.0" mnemonicParsing="false" onAction="#processOperator" prefHeight="40.0" prefWidth="50.0" text="+" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                </children>

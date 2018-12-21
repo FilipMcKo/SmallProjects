@@ -12,7 +12,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("userInterface.fxml"));
         primaryStage.setTitle("LiczPan");
-        primaryStage.setScene(new Scene(root, 210, 275));
+        primaryStage.setScene(new Scene(root, 200, 295));
         primaryStage.setResizable(false);
         primaryStage.show();
     }
