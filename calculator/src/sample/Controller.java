@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+
 import java.math.BigDecimal;
 
 
@@ -96,31 +97,31 @@ public class Controller {
                         output.setText((String) output.getText().subSequence(0, (output.getText().length() - 1)));
                     break;
                 case ADD:
-                    if (operator!=Equasion.NULL) return;
+                    if (operator != Equasion.NULL) return;
                     number1 = BigDecimal.valueOf(Double.parseDouble(output.getText()));
                     operator = Equasion.ADD;
                     output.setText("");
                     break;
                 case SUBTRACT:
-                    if (operator!=Equasion.NULL) return;
+                    if (operator != Equasion.NULL) return;
                     number1 = BigDecimal.valueOf(Double.parseDouble(output.getText()));
                     operator = Equasion.SUBTRACT;
                     output.setText("");
                     break;
                 case MULTIPLY:
-                    if (operator!=Equasion.NULL) return;
+                    if (operator != Equasion.NULL) return;
                     number1 = BigDecimal.valueOf(Double.parseDouble(output.getText()));
                     operator = Equasion.MULTIPLY;
                     output.setText("");
                     break;
                 case DIVIDE:
-                    if (operator!=Equasion.NULL) return;
+                    if (operator != Equasion.NULL) return;
                     number1 = new BigDecimal(output.getText());
                     operator = Equasion.DIVIDE;
                     output.setText("");
                     break;
                 case ENTER:
-                    if (operator==Equasion.NULL) return;
+                    if (operator == Equasion.NULL) return;
                     output.setText(String.valueOf(model.calculate(number1, new BigDecimal(output.getText()), operator)));
                     operator = Equasion.NULL;
                     number1 = null;
@@ -150,19 +151,19 @@ public class Controller {
     private void processOperator(ActionEvent event) {
         String value = ((Button) event.getSource()).getText();
 
-        if (!"=".equals(value)) {
+        if (!value.equals("=")) {
             if (operator != Equasion.NULL)
                 return;
-            if ("CE".equals(value)) {
+            if (value.equals("CE")) {
                 operator = Equasion.NULL;
                 value = "";
                 number1 = BigDecimal.ZERO;
             }
-            operator = Equasion.valueOf(value);
+            operator = Equasion.getOperator(value);
             number1 = new BigDecimal(output.getText());
             output.setText("");
         } else {
-            if (operator==Equasion.NULL)
+            if (operator == Equasion.NULL)
                 return;
             output.setText(String.valueOf(model.calculate(number1, new BigDecimal(output.getText()), operator)));
             operator = Equasion.NULL;
@@ -178,6 +179,7 @@ public class Controller {
             stackPane.setDisable(false);
             ceButton.setDisable(false);
             turnedOn = true;
+            output.setOpacity(1);
 
         } else {
             gridPane.setDisable(true);
@@ -185,6 +187,7 @@ public class Controller {
             stackPane.setDisable(true);
             ceButton.setDisable(true);
             turnedOn = false;
+            output.setOpacity(0.5);
         }
     }
 

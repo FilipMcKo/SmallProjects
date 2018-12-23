@@ -9,7 +9,18 @@ public enum Equasion {
         this.symbol = symbol;
     }
 
-    public String getSymbol() {
-        return symbol;
+    public static Equasion getOperator(String value) {
+        switch (value) {
+            case "+":
+                return Equasion.ADD;
+            case "-":
+                return Equasion.SUBTRACT;
+            case "X":
+                return Equasion.MULTIPLY;
+            case "/":
+                return Equasion.DIVIDE;
+        }
+         return Equasion.NULL;
+
     }
 }
