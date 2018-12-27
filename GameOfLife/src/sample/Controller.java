@@ -34,7 +34,6 @@ public class Controller {
         for (int i = 1; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 cello = new Cell(i, j);
-                cello.setOnAction(event -> mouseHandler());
                 gridPane.add(cello, j, i);
                 cells[i][j]=cello;
             }
