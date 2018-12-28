@@ -15,7 +15,23 @@ public class Cell extends StackPane {
     private int height = 15;
     private int row, column;
     private boolean alive;
-    public static int count = 0;
+    private int aliveNeighbors;
+
+    public int getAliveNeighbors() {
+        return aliveNeighbors;
+    }
+
+    public void addAliveNeighbor() {
+        this.aliveNeighbors++;
+    }
+
+    public void setAliveNeighbors(int aliveNeighbors) {
+        this.aliveNeighbors = aliveNeighbors;
+    }
+
+    public void subtractAliveNeighbot(){
+        this.aliveNeighbors--;
+    }
 
     Cell(int row, int column) {
         this.rectangle = new Rectangle(width, height, Color.WHITE);
@@ -23,6 +39,7 @@ public class Cell extends StackPane {
         this.alive = false;
         this.row = row;
         this.column = column;
+        this.aliveNeighbors=0;
         getChildren().add(rectangle);
         setOnMouseClicked(event -> changeState());
     }
@@ -35,6 +52,11 @@ public class Cell extends StackPane {
         } else {
             this.rectangle.setFill(Color.WHITE);
         }
-        System.out.println("state changed");
+        //System.out.println("state changed");
+    }
+
+    public boolean isAlive(){
+        if(alive) return true;
+        return false;
     }
 }

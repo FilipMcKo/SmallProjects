@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -21,12 +22,12 @@
                         <Rectangle fill="#ff6b1f54" height="30.0" stroke="#000000aa" strokeType="INSIDE" width="900.0" />
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                                    <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Start">
+                                    <Button mnemonicParsing="false" onAction="#startKey" prefHeight="26.0" prefWidth="100.0" text="Start">
                                  <HBox.margin>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Pause">
+                              <Button mnemonicParsing="false" onAction="#pauseKey" prefHeight="26.0" prefWidth="100.0" text="Pause">
                                  <HBox.margin>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </HBox.margin>
@@ -46,6 +47,12 @@
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </HBox.margin>
                               </Button>
+                              <HBox prefHeight="30.0" prefWidth="268.0" />
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="26.0" prefWidth="70.0" text="Generations: " textAlignment="CENTER">
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                                 </HBox.margin>
+                              </Label>
                            </children>
                         </HBox>
                      </children>
@@ -159,15 +166,8 @@
                               <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="15.0" minHeight="15.0" prefHeight="15.0" vgrow="SOMETIMES" />
                           </rowConstraints>
-                     <children>
-                        <StackPane fx:id="stack" prefHeight="150.0" prefWidth="200.0">
-                           <children>
-                              <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="15.0" stroke="BLACK" strokeType="INSIDE" width="15.0" />
-                           </children>
-                        </StackPane>
-                     </children>
                       </GridPane>
-                  <Rectangle fill="#cdff2154" height="600.0" opacity="0.5" stroke="#000000aa" strokeType="INSIDE" width="900.0" />
+                  <Rectangle fx:id="cell3" fill="#cdff2154" height="600.0" opacity="0.5" stroke="#000000aa" strokeType="INSIDE" width="900.0" />
                </children>
             </StackPane>
             <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="900.0">
