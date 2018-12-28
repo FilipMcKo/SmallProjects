@@ -29,10 +29,6 @@ public class Cell extends StackPane {
         this.aliveNeighbors = aliveNeighbors;
     }
 
-    public void subtractAliveNeighbot(){
-        this.aliveNeighbors--;
-    }
-
     Cell(int row, int column) {
         this.rectangle = new Rectangle(width, height, Color.WHITE);
         this.rectangle.setStroke(Color.LIGHTGRAY);
@@ -52,7 +48,14 @@ public class Cell extends StackPane {
         } else {
             this.rectangle.setFill(Color.WHITE);
         }
-        //System.out.println("state changed");
+    }
+
+    public void killCell(){
+        if(this.alive) this.changeState();
+    }
+
+    public void reviveCell(){
+        if(!this.alive) this.changeState();
     }
 
     public boolean isAlive(){

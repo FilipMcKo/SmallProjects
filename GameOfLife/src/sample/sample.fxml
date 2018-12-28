@@ -32,23 +32,33 @@
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Speed Up">
+                              <Button mnemonicParsing="false" onAction="#speedUpKey" prefHeight="26.0" prefWidth="100.0" text="Speed Up">
                                  <HBox.margin>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Slow Down">
+                              <Button mnemonicParsing="false" onAction="#slowDownKey" prefHeight="26.0" prefWidth="100.0" text="Slow Down">
                                  <HBox.margin>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </HBox.margin>
                               </Button>
-                              <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" text="Reset">
+                              <Button mnemonicParsing="false" onAction="#saveSetupKey" prefHeight="26.0" prefWidth="100.0" text="Save Setup">
                                  <HBox.margin>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </HBox.margin>
                               </Button>
-                              <HBox prefHeight="30.0" prefWidth="268.0" />
-                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="26.0" prefWidth="70.0" text="Generations: " textAlignment="CENTER">
+                              <Button mnemonicParsing="false" onAction="#loadSetupKey" prefHeight="26.0" prefWidth="100.0" text="Load Setup">
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#resetKey" prefHeight="26.0" prefWidth="100.0" text="Reset">
+                                 <HBox.margin>
+                                    <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <HBox prefHeight="30.0" prefWidth="84.0" />
+                              <Label fx:id="nrOfGenerations" contentDisplay="CENTER" prefHeight="26.0" prefWidth="115.0" text="Generations: ">
                                  <HBox.margin>
                                     <Insets bottom="2.0" left="1.0" right="1.0" top="2.0" />
                                  </HBox.margin>
