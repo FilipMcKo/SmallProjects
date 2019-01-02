@@ -1,20 +1,22 @@
 package sample;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-
-import java.util.concurrent.TimeUnit;
-
 public class Life {
 
-    Cell[][] previousSetup = new Cell[Controller.rows][Controller.columns];
+    Cell[][] previousSetup;
 
-    public void setPreviousSetup(Cell[][] cell) {
+    Life() {
+        previousSetup = new Cell[Controller.rows][Controller.columns];
+        for (int i = 0; i < Controller.rows; i++) {
+            for (int j = 0; j < Controller.columns; j++) {
+                previousSetup[i][j] = new Cell(i, j);
+            }
+        }
+    }
+
+    void setPreviousSetup(Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
-                this.previousSetup[i][j] = cell[i][j];
+                this.previousSetup[i][j].setAlive(cell[i][j].isAlive());
             }
         }
     }
@@ -22,13 +24,24 @@ public class Life {
     public Cell[][] getPreviousSetup(Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
-                cell[i][j] = previousSetup[i][j];
+                cell[i][j].setAlive(previousSetup[i][j].isAlive());
             }
         }
         return cell;
     }
 
-    public static void countNeighbors(Cell[][] cell) {
+    static Cell[][] setState(int mx, int my, Cell[][] cell) {
+
+        for (int i = 0; i < cell.length; i++) {
+            for (int j = 0; j < cell[0].length; j++) {
+                if (mx > j * 15 && mx < (j * 15 + 15) && my > i * 15 && my < (i * 15 + 15))
+                    cell[i][j].changeState();
+            }
+        }
+        return cell;
+    }
+
+    static void countNeighbors(Cell[][] cell) {
 
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
@@ -69,7 +82,7 @@ public class Life {
         }
     }
 
-    public Cell[][] newLife(Cell[][] cell) {
+    Cell[][] newLife(Cell[][] cell) {
         countNeighbors(cell);
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
@@ -83,7 +96,8 @@ public class Life {
         return cell;
     }
 
-    public Cell[][] killAll(Cell[][] cell) {
+
+    Cell[][] killAll(Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
                 cell[i][j].killCell();
@@ -92,7 +106,7 @@ public class Life {
         return cell;
     }
 
-    public Cell[][] reviveAll(Cell[][] cell) {
+    Cell[][] reviveAll(Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
                 cell[i][j].reviveCell();
@@ -102,6 +116,16 @@ public class Life {
     }
 
 
+    boolean isTheSame(Cell[][] cell) {
+        boolean theSame = true;
+        Cell[][] nextLife = newLife(cell);
+        for (int i = 0; i < cell.length; i++) {
+            for (int j = 0; j < cell[0].length; j++) {
+                if (cell[i][j].isAlive() != nextLife[i][j].isAlive()) theSame = false;
+            }
+        }
+        return theSame;
+    }
 }
 
 

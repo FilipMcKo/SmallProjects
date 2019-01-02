@@ -1,13 +1,21 @@
 package sample;
 
 import javafx.animation.AnimationTimer;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
-import java.util.concurrent.TimeUnit;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.ResourceBundle;
 
-public class Controller {
+public class Controller implements Initializable {
 
     private AnimationTimer timer;
     private Life life = new Life();
@@ -17,54 +25,41 @@ public class Controller {
     public static int columns = 60;
     public static int generations = 0;
     private static boolean isGamePlayed = false;
+    private static int mx = -100;
+    private static int my = -100;
+    private static boolean[][] deadOrAlive1 = new boolean[rows][columns];
+    private static boolean[][] deadOrAlive2 = new boolean[rows][columns];
+    private static boolean[][] deadOrAlive3 = new boolean[rows][columns];
+    boolean lastTwoGenerationsTheSame;
+    boolean thisAndSecondToLastGenerationTheSame;
+
     @FXML
     private GridPane gridPane;
     @FXML
     public Cell[][] cells = new Cell[rows][columns];
-    private Cell[][] previousSetup;
+    private Cell[][] previousSetup = new Cell[rows][columns];
     @FXML
     Cell cello;
     @FXML
     Label nrOfGenerations;
 
 
-    @FXML
-    public void initialize() {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         nrOfGenerations.setText("Generations: " + generations);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
                 cello = new Cell(i, j);
                 gridPane.add(cello, j, i);
                 cells[i][j] = cello;
+                deadOrAlive1[i][j] = true;
+                deadOrAlive2[i][j] = false;
+                if (j % 2 == 0)
+                    deadOrAlive3[i][j] = true;
+                else
+                    deadOrAlive3[i][j] = false;
             }
         }
-        cells[20][29].changeState();
-        cells[20][30].changeState();
-        cells[20][31].changeState();
-        cells[21][29].changeState();
-        cells[21][30].changeState();
-        cells[21][31].changeState();
-        cells[21][32].changeState();
-        cells[22][32].changeState();
-        cells[22][33].changeState();
-        cells[22][34].changeState();
-        cells[21][33].changeState();
-        cells[21][34].changeState();
-        cells[21][35].changeState();
-
-
-        cells[2][29].changeState();
-        cells[2][30].changeState();
-        cells[31][27].changeState();
-        cells[2][31].changeState();
-        cells[31][28].changeState();
-        cells[31][26].changeState();
-        cells[31][25].changeState();
-        cells[31][29].changeState();
-        cells[31][30].changeState();
-        cells[31][31].changeState();
-        cells[32][31].changeState();
-        cells[33][31].changeState();
 
         timer = new AnimationTimer() {
             @Override
@@ -78,12 +73,17 @@ public class Controller {
     }
 
     @FXML
-    public void startKey() {
+    private void changeClickedCell(MouseEvent event) {
+        mx = (int) event.getX();
+        my = (int) event.getY();
+        life.setState(mx, my, cells);
+    }
 
+    @FXML
+    public void startKey() {
         if (isGamePlayed)
             return;
         else {
-            //if (generations == 0) life.setPreviousSetup(cells);
             timer.start();
             isGamePlayed = true;
         }
@@ -112,25 +112,68 @@ public class Controller {
         life.killAll(cells);
         generations = 0;
         nrOfGenerations.setText("Generations: " + (generations));
+       /* for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                deadOrAlive1[i][j] = true;
+                deadOrAlive2[i][j] = false;
+                if (columns % 2 == 0)
+                    deadOrAlive3[i][j] = true;
+                else
+                    deadOrAlive3[i][j] = false;
+            }
+        }*/
     }
 
     @FXML
-    public void saveSetupKey(){
-    life.setPreviousSetup(cells);
+    public void saveSetupKey() {
+        life.setPreviousSetup(cells);
     }
 
 
     @FXML
-    public void loadSetupKey(){
+    public void loadSetupKey() {
         generations = 0;
         nrOfGenerations.setText("Generations: " + (generations));
-        cells=life.getPreviousSetup(cells);
+        life.getPreviousSetup(cells);
     }
 
     public void playGame() {
-
         nrOfGenerations.setText("Generations: " + (++generations));
         life.newLife(cells);
+
+
+        if (generations % 3 == 0) {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    if (cells[i][j].isAlive()) deadOrAlive1[i][j] = true;
+                    else deadOrAlive1[i][j] = false;
+                }
+            }
+        } else if (generations % 3 == 1) {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    if (cells[i][j].isAlive()) deadOrAlive2[i][j] = true;
+                    else deadOrAlive2[i][j] = false;
+                }
+            }
+        } else {
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < columns; j++) {
+                    if (cells[i][j].isAlive()) deadOrAlive3[i][j] = true;
+                    else deadOrAlive3[i][j] = false;
+                }
+            }
+        }
+
+        lastTwoGenerationsTheSame = true;
+        thisAndSecondToLastGenerationTheSame = true;
+        for (int i = 0; i < rows; i++) {
+            if (!Arrays.equals(deadOrAlive1[i], deadOrAlive2[i])) lastTwoGenerationsTheSame = false;
+            if (!Arrays.equals(deadOrAlive1[i], deadOrAlive3[i])) thisAndSecondToLastGenerationTheSame = false;
+        }
+
+        if (lastTwoGenerationsTheSame || thisAndSecondToLastGenerationTheSame) timer.stop();
+
 
     }
 

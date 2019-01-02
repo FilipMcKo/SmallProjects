@@ -1,9 +1,5 @@
 package sample;
 
-import javafx.event.EventHandler;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -16,6 +12,15 @@ public class Cell extends StackPane {
     private int row, column;
     private boolean alive;
     private int aliveNeighbors;
+
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+        if (alive) {
+            this.rectangle.setFill(Color.DODGERBLUE);
+        } else {
+            this.rectangle.setFill(Color.WHITE);
+        }
+    }
 
     public int getAliveNeighbors() {
         return aliveNeighbors;
@@ -32,12 +37,12 @@ public class Cell extends StackPane {
     Cell(int row, int column) {
         this.rectangle = new Rectangle(width, height, Color.WHITE);
         this.rectangle.setStroke(Color.LIGHTGRAY);
+        this.rectangle.toFront();
         this.alive = false;
         this.row = row;
         this.column = column;
-        this.aliveNeighbors=0;
+        this.aliveNeighbors = 0;
         getChildren().add(rectangle);
-        setOnMouseClicked(event -> changeState());
     }
 
 
@@ -50,16 +55,19 @@ public class Cell extends StackPane {
         }
     }
 
-    public void killCell(){
-        if(this.alive) this.changeState();
+    public void killCell() {
+        if (this.alive) this.changeState();
     }
 
-    public void reviveCell(){
-        if(!this.alive) this.changeState();
+    public void reviveCell() {
+        if (!this.alive) this.changeState();
     }
 
-    public boolean isAlive(){
-        if(alive) return true;
+    public boolean isAlive() {
+        if (alive) return true;
         return false;
     }
+
+
+
 }
