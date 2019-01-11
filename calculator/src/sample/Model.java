@@ -4,19 +4,23 @@ import java.math.BigDecimal;
 
 public class Model {
 
-    public BigDecimal calculate(BigDecimal number1, BigDecimal number2, Equasion operator) {
-        switch (operator) {
+
+
+
+
+    public BigDecimal calculate(BigDecimal nr1, BigDecimal nr2, Equasion op) {
+        switch (op) {
             case ADD:
-                return number1.add(number2);
+                return nr1.add(nr2);
             case SUBTRACT:
-                return number1.subtract(number2);
+                return nr1.subtract(nr2);
             case MULTIPLY:
-                return number1.multiply(number2);
+                return nr1.multiply(nr2);
             case DIVIDE:
-                if (number2.equals(BigDecimal.ZERO)) return BigDecimal.ZERO;
-                return number1.divide(number2,7,BigDecimal.ROUND_HALF_UP);
+                if (nr2.equals(BigDecimal.ZERO)) return BigDecimal.ZERO;
+                return nr1.divide(nr2,7,BigDecimal.ROUND_HALF_UP);
             default:
-                System.out.println("Unknown operator - " + operator);
+                System.out.println("Unknown operator - " + op);
         }
         return BigDecimal.ZERO;
     }
