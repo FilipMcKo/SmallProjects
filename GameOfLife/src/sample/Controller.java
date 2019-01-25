@@ -71,8 +71,7 @@ public class Controller implements Initializable {
 
     @FXML
     public void startKey() {
-        if (isGamePlayed)
-            return;
+        if (isGamePlayed){}
         else {
             timer.start();
             isGamePlayed = true;
