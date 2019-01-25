@@ -5,15 +5,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
-public class Cell extends StackPane {
-    public Rectangle rectangle;
+class Cell extends StackPane {
+    private Rectangle rectangle;
     private int width = 15;
     private int height = 15;
     private int row, column;
     private boolean alive;
     private int aliveNeighbors;
 
-    public void setAlive(boolean alive) {
+    void setAlive(boolean alive) {
         this.alive = alive;
         if (alive) {
             this.rectangle.setFill(Color.DODGERBLUE);
@@ -22,15 +22,15 @@ public class Cell extends StackPane {
         }
     }
 
-    public int getAliveNeighbors() {
+    int getAliveNeighbors() {
         return aliveNeighbors;
     }
 
-    public void addAliveNeighbor() {
+    void addAliveNeighbor() {
         this.aliveNeighbors++;
     }
 
-    public void setAliveNeighbors(int aliveNeighbors) {
+    void setAliveNeighbors(int aliveNeighbors) {
         this.aliveNeighbors = aliveNeighbors;
     }
 
@@ -46,7 +46,7 @@ public class Cell extends StackPane {
     }
 
 
-    public void changeState() {
+    void changeState() {
         alive = !this.alive;
         if (alive) {
             this.rectangle.setFill(Color.DODGERBLUE);
@@ -55,17 +55,16 @@ public class Cell extends StackPane {
         }
     }
 
-    public void killCell() {
+    void killCell() {
         if (this.alive) this.changeState();
     }
 
-    public void reviveCell() {
+    void reviveCell() {
         if (!this.alive) this.changeState();
     }
 
-    public boolean isAlive() {
-        if (alive) return true;
-        return false;
+    boolean isAlive() {
+        return alive;
     }
 
 

@@ -17,25 +17,22 @@ public class Controller implements Initializable {
     private Life life = new Life();
     private long lastUpdate = 0;
     private long speedRate = 100000000;
-    public static int rows = 40;
-    public static int columns = 60;
-    public static int generations = 0;
+    static int rows = 40;
+    static int columns = 60;
+    private static int generations = 0;
     private static boolean isGamePlayed = false;
     private static int mx = -100;
     private static int my = -100;
     private static boolean[][] lifeHistory1 = new boolean[rows][columns];
     private static boolean[][] lifeHistory2 = new boolean[rows][columns];
     private static boolean[][] lifeHistory3 = new boolean[rows][columns];
-    boolean lifeHistory1And2TheSame;
-    boolean lifeHistory2And3TheSame;
-    boolean lifeHistory1And3TheSame;
 
     @FXML
     private GridPane gridPane;
     @FXML
-    public Cell[][] cells = new Cell[rows][columns];
+    private Cell[][] cells = new Cell[rows][columns];
     @FXML
-    Cell cello;
+    private Cell cello;
     @FXML
     Label nrOfGenerations;
 
@@ -50,10 +47,7 @@ public class Controller implements Initializable {
                 cells[i][j] = cello;
                 lifeHistory1[i][j] = true;
                 lifeHistory2[i][j] = false;
-                if (j % 2 == 0)
-                    lifeHistory3[i][j] = true;
-                else
-                    lifeHistory3[i][j] = false;
+                lifeHistory3[i][j] = j % 2 == 0;
             }
         }
 
@@ -89,8 +83,7 @@ public class Controller implements Initializable {
         if (isGamePlayed) {
             isGamePlayed = false;
             timer.stop();
-        } else
-            return;
+        }
     }
 
     @FXML
@@ -126,7 +119,7 @@ public class Controller implements Initializable {
         life.getPreviousSetup(cells);
     }
 
-    public void playGame() {
+    private void playGame() {
         nrOfGenerations.setText("Generations: " + (++generations));
         life.newLife(cells);
 
@@ -134,36 +127,33 @@ public class Controller implements Initializable {
         if (generations % 3 == 0) {
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < columns; j++) {
-                    if (cells[i][j].isAlive()) lifeHistory1[i][j] = true;
-                    else lifeHistory1[i][j] = false;
+                    lifeHistory1[i][j] = cells[i][j].isAlive();
                 }
             }
         } else if (generations % 3 == 1) {
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < columns; j++) {
-                    if (cells[i][j].isAlive()) lifeHistory2[i][j] = true;
-                    else lifeHistory2[i][j] = false;
+                    lifeHistory2[i][j] = cells[i][j].isAlive();
                 }
             }
         } else if (generations % 3 == 2) {
             for (int i = 0; i < rows; i++) {
                 for (int j = 0; j < columns; j++) {
-                    if (cells[i][j].isAlive()) lifeHistory3[i][j] = true;
-                    else lifeHistory3[i][j] = false;
+                    lifeHistory3[i][j] = cells[i][j].isAlive();
                 }
             }
         }
 
-        lifeHistory1And2TheSame = true;
-        lifeHistory2And3TheSame = true;
-        lifeHistory1And3TheSame = true;
+        boolean lifeHistory1And2TheSame = true;
+        boolean lifeHistory2And3TheSame = true;
+        boolean lifeHistory1And3TheSame = true;
         for (int i = 0; i < rows; i++) {
             if (!Arrays.equals(lifeHistory1[i], lifeHistory2[i])) lifeHistory1And2TheSame = false;
             if (!Arrays.equals(lifeHistory2[i], lifeHistory3[i])) lifeHistory2And3TheSame = false;
             if (!Arrays.equals(lifeHistory1[i], lifeHistory3[i])) lifeHistory1And3TheSame = false;
         }
 
-        if ((lifeHistory1And2TheSame||lifeHistory2And3TheSame) || lifeHistory2And3TheSame) {
+        if ((lifeHistory1And2TheSame || lifeHistory2And3TheSame) || lifeHistory1And3TheSame) {
             timer.stop();
             isGamePlayed = false;
         }

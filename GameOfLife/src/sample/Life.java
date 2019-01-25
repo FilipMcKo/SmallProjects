@@ -2,7 +2,7 @@ package sample;
 
 public class Life {
 
-    Cell[][] previousSetup;
+    private Cell[][] previousSetup;
 
     Life() {
         previousSetup = new Cell[Controller.rows][Controller.columns];
@@ -21,7 +21,7 @@ public class Life {
         }
     }
 
-    public Cell[][] getPreviousSetup(Cell[][] cell) {
+    Cell[][] getPreviousSetup(Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
                 cell[i][j].setAlive(previousSetup[i][j].isAlive());
@@ -30,7 +30,7 @@ public class Life {
         return cell;
     }
 
-    static Cell[][] setState(int mx, int my, Cell[][] cell) {
+     Cell[][] setState(int mx, int my, Cell[][] cell) {
 
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
@@ -41,7 +41,7 @@ public class Life {
         return cell;
     }
 
-    static void countNeighbors(Cell[][] cell) {
+    void countNeighbors(Cell[][] cell) {
 
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
