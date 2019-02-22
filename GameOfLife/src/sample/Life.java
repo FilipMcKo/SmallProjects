@@ -1,14 +1,10 @@
 package sample;
 
-import java.util.logging.Logger;
-
 public class Life {
-
-    Logger logger = Logger.getLogger("JakaNazwa");
 
     private Cell[][] previousSetup;
 
-    int[][] neighbors = new int[][] {
+    private int[][] neighbors = new int[][]{
             {-1, -1},
             {-1, 0},
             {-1, 1},
@@ -44,26 +40,34 @@ public class Life {
         }
     }
 
-     void setState(int mx, int my, Cell[][] cell) {
-
+    void setState(int mx, int my, Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
                 if (mx > j * 15 && mx < (j * 15 + 15) && my > i * 15 && my < (i * 15 + 15))
                     cell[i][j].changeState();
             }
         }
-     }
+    }
 
     private void countNeighbors(Cell[][] cell) {
-
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
                 cell[i][j].resetAliveNeighbors();
-                for (int k = 0; k < neighbors.length ; k++) {
+                for (int[] neighbor : neighbors) {
                     try {
-                        if (cell[i + neighbors[k][0]][j + neighbors[k][1]].isAlive()) cell[i][j].addAliveNeighbor();
+                        if (cell[i + neighbor[0]][j + neighbor[1]].isAlive()) cell[i][j].addAliveNeighbor();
                     } catch (IndexOutOfBoundsException e) {
-                        //TODO: zawinac plansze jak wystepuje wyjatek
+                        int neighborRow = i + neighbor[0];
+                        int neighborColumn = j + neighbor[1];
+
+                        if (neighborRow < 0 || neighborRow == cell.length) {
+                            neighborRow = i - neighbor[0] * (cell.length - 1);
+                        }
+                        if (neighborColumn < 0 || neighborColumn == cell[0].length) {
+                            neighborColumn = j - neighbor[1] * (cell[0].length - 1);
+                        }
+
+                        if (cell[neighborRow][neighborColumn].isAlive()) cell[i][j].addAliveNeighbor();
                     }
                 }
             }
