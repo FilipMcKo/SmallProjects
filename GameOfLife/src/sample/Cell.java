@@ -2,14 +2,12 @@ package sample;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 class Cell extends StackPane {
     private Rectangle rectangle;
     private int width = 15;
     private int height = 15;
-    private int row, column;
     private boolean alive;
     private int aliveNeighbors;
 
@@ -30,17 +28,14 @@ class Cell extends StackPane {
         this.aliveNeighbors++;
     }
 
-    void setAliveNeighbors(int aliveNeighbors) {
-        this.aliveNeighbors = aliveNeighbors;
-    }
+    void resetAliveNeighbors() {
+        this.aliveNeighbors = 0;    }
 
-    Cell(int row, int column) {
+    Cell() {
         this.rectangle = new Rectangle(width, height, Color.WHITE);
         this.rectangle.setStroke(Color.LIGHTGRAY);
         this.rectangle.toFront();
         this.alive = false;
-        this.row = row;
-        this.column = column;
         this.aliveNeighbors = 0;
         getChildren().add(rectangle);
     }
@@ -57,10 +52,6 @@ class Cell extends StackPane {
 
     void killCell() {
         if (this.alive) this.changeState();
-    }
-
-    void reviveCell() {
-        if (!this.alive) this.changeState();
     }
 
     boolean isAlive() {

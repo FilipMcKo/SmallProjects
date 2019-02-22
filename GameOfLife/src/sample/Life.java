@@ -1,14 +1,29 @@
 package sample;
 
+import java.util.logging.Logger;
+
 public class Life {
 
+    Logger logger = Logger.getLogger("JakaNazwa");
+
     private Cell[][] previousSetup;
+
+    int[][] neighbors = new int[][] {
+            {-1, -1},
+            {-1, 0},
+            {-1, 1},
+            {0, -1},
+            {0, 1},
+            {1, -1},
+            {1, 0},
+            {1, 1},
+    };
 
     Life() {
         previousSetup = new Cell[Controller.rows][Controller.columns];
         for (int i = 0; i < Controller.rows; i++) {
             for (int j = 0; j < Controller.columns; j++) {
-                previousSetup[i][j] = new Cell(i, j);
+                previousSetup[i][j] = new Cell();
             }
         }
     }
@@ -43,38 +58,13 @@ public class Life {
 
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
-                cell[i][j].setAliveNeighbors(0);
-                try {
-                    if (cell[i - 1][j - 1].isAlive()) cell[i][j].addAliveNeighbor();
-                } catch (IndexOutOfBoundsException e) {
-                }
-                try {
-                    if (cell[i - 1][j].isAlive()) cell[i][j].addAliveNeighbor();
-                } catch (IndexOutOfBoundsException e) {
-                }
-                try {
-                    if (cell[i - 1][j + 1].isAlive()) cell[i][j].addAliveNeighbor();
-                } catch (IndexOutOfBoundsException e) {
-                }
-                try {
-                    if (cell[i][j - 1].isAlive()) cell[i][j].addAliveNeighbor();
-                } catch (IndexOutOfBoundsException e) {
-                }
-                try {
-                    if (cell[i][j + 1].isAlive()) cell[i][j].addAliveNeighbor();
-                } catch (IndexOutOfBoundsException e) {
-                }
-                try {
-                    if (cell[i + 1][j - 1].isAlive()) cell[i][j].addAliveNeighbor();
-                } catch (IndexOutOfBoundsException e) {
-                }
-                try {
-                    if (cell[i + 1][j].isAlive()) cell[i][j].addAliveNeighbor();
-                } catch (IndexOutOfBoundsException e) {
-                }
-                try {
-                    if (cell[i + 1][j + 1].isAlive()) cell[i][j].addAliveNeighbor();
-                } catch (IndexOutOfBoundsException e) {
+                cell[i][j].resetAliveNeighbors();
+                for (int k = 0; k < neighbors.length ; k++) {
+                    try {
+                        if (cell[i + neighbors[k][0]][j + neighbors[k][1]].isAlive()) cell[i][j].addAliveNeighbor();
+                    } catch (IndexOutOfBoundsException e) {
+                        //TODO: zawinac plansze jak wystepuje wyjatek
+                    }
                 }
             }
         }
@@ -102,15 +92,6 @@ public class Life {
                 cells[j].killCell();
             }
         }
-    }
-
-    Cell[][] reviveAll(Cell[][] cell) {
-        for (Cell[] cells : cell) {
-            for (int j = 0; j < cell[0].length; j++) {
-                cells[j].reviveCell();
-            }
-        }
-        return cell;
     }
 
 

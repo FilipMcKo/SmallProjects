@@ -42,7 +42,7 @@ public class Controller implements Initializable {
         nrOfGenerations.setText("Generations: " + generations);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                cello = new Cell(i, j);
+                cello = new Cell();
                 gridPane.add(cello, j, i);
                 cells[i][j] = cello;
                 lifeHistory1[i][j] = true;
@@ -71,11 +71,9 @@ public class Controller implements Initializable {
 
     @FXML
     public void startKey() {
-        if (isGamePlayed){}
-        else {
-            timer.start();
-            isGamePlayed = true;
-        }
+        if (!isGamePlayed){timer.start();
+            isGamePlayed = true;}
+
     }
 
     public void pauseKey() {
@@ -152,11 +150,13 @@ public class Controller implements Initializable {
             if (!Arrays.equals(lifeHistory1[i], lifeHistory3[i])) lifeHistory1And3TheSame = false;
         }
 
-        if ((lifeHistory1And2TheSame || lifeHistory2And3TheSame) || lifeHistory1And3TheSame) {
+        if (lifeHistory1And2TheSame || lifeHistory2And3TheSame || lifeHistory1And3TheSame) {
             timer.stop();
             isGamePlayed = false;
         }
 
+
+        //TODO: rozbic ta funkcje na mniejsze
     }
 
 
