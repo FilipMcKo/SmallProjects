@@ -1,10 +1,14 @@
-package sample;
+package Model;
 
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-class Cell extends StackPane {
+/**
+ * @author fmucko
+ */
+
+public class Cell extends StackPane {
     private Rectangle rectangle;
     private int width = 15;
     private int height = 15;
@@ -31,7 +35,7 @@ class Cell extends StackPane {
     void resetAliveNeighbors() {
         this.aliveNeighbors = 0;    }
 
-    Cell() {
+    public Cell() {
         this.rectangle = new Rectangle(width, height, Color.WHITE);
         this.rectangle.setStroke(Color.LIGHTGRAY);
         this.rectangle.toFront();
@@ -54,7 +58,7 @@ class Cell extends StackPane {
         if (this.alive) this.changeState();
     }
 
-    boolean isAlive() {
+    public boolean isAlive() {
         return alive;
     }
 

@@ -1,4 +1,9 @@
-package sample;
+package Model;
+
+import Controller.Controller;
+/**
+ * @author fmucko
+ */
 
 public class Life {
 
@@ -15,7 +20,7 @@ public class Life {
             {1, 1},
     };
 
-    Life() {
+    public Life() {
         previousSetup = new Cell[Controller.rows][Controller.columns];
         for (int i = 0; i < Controller.rows; i++) {
             for (int j = 0; j < Controller.columns; j++) {
@@ -24,7 +29,7 @@ public class Life {
         }
     }
 
-    void setPreviousSetup(Cell[][] cell) {
+    public void setPreviousSetup(Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
                 this.previousSetup[i][j].setAlive(cell[i][j].isAlive());
@@ -32,7 +37,7 @@ public class Life {
         }
     }
 
-    void getPreviousSetup(Cell[][] cell) {
+    public void getPreviousSetup(Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
                 cell[i][j].setAlive(previousSetup[i][j].isAlive());
@@ -40,7 +45,7 @@ public class Life {
         }
     }
 
-    void setState(int mx, int my, Cell[][] cell) {
+    public void setState(int mx, int my, Cell[][] cell) {
         for (int i = 0; i < cell.length; i++) {
             for (int j = 0; j < cell[0].length; j++) {
                 if (mx > j * 15 && mx < (j * 15 + 15) && my > i * 15 && my < (i * 15 + 15))
@@ -74,7 +79,7 @@ public class Life {
         }
     }
 
-    Cell[][] newLife(Cell[][] cell) {
+    public Cell[][] newLife(Cell[][] cell) {
         countNeighbors(cell);
 
         for (int i = 0; i < cell.length; i++) {
@@ -90,7 +95,7 @@ public class Life {
     }
 
 
-    void killAll(Cell[][] cell) {
+    public void killAll(Cell[][] cell) {
         for (Cell[] cells : cell) {
             for (int j = 0; j < cell[0].length; j++) {
                 cells[j].killCell();
@@ -99,7 +104,7 @@ public class Life {
     }
 
 
-    boolean isTheSame(Cell[][] cell) {
+    public boolean isTheSame(Cell[][] cell) {
         boolean theSame = true;
         Cell[][] nextLife = newLife(cell);
         for (int i = 0; i < cell.length; i++) {
@@ -110,5 +115,6 @@ public class Life {
         return theSame;
     }
 }
+
 
 

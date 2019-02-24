@@ -1,5 +1,6 @@
-package sample;
+package Controller;
 
+import Model.*;
 import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,14 +12,19 @@ import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
+/**
+ * @author fmucko
+ */
+
+
 public class Controller implements Initializable {
 
     private AnimationTimer timer;
     private Life life = new Life();
     private long lastUpdate = 0;
     private long speedRate = 100000000;
-    static int rows = 40;
-    static int columns = 60;
+    public static int rows = 40;
+    public static int columns = 60;
     private static int generations = 0;
     private static boolean isGamePlayed = false;
     private static int mx = -100;
@@ -30,11 +36,11 @@ public class Controller implements Initializable {
     @FXML
     private GridPane gridPane;
     @FXML
-    private Cell[][] cells = new Cell[rows][columns];
+    private Model.Cell[][] cells = new Model.Cell[rows][columns];
     @FXML
-    private Cell cello;
+    private Model.Cell cello;
     @FXML
-    Label nrOfGenerations;
+    private Label nrOfGenerations;
 
 
     @Override
@@ -42,7 +48,7 @@ public class Controller implements Initializable {
         nrOfGenerations.setText("Generations: " + generations);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                cello = new Cell();
+                cello = new Model.Cell();
                 gridPane.add(cello, j, i);
                 cells[i][j] = cello;
                 lifeHistory1[i][j] = true;
@@ -71,8 +77,10 @@ public class Controller implements Initializable {
 
     @FXML
     public void startKey() {
-        if (!isGamePlayed){timer.start();
-            isGamePlayed = true;}
+        if (!isGamePlayed) {
+            timer.start();
+            isGamePlayed = true;
+        }
 
     }
 
@@ -157,7 +165,9 @@ public class Controller implements Initializable {
 
 
         //TODO: rozbic ta funkcje na mniejsze
+        //TODO: MVC to package a nie klasy wiec refactor nazw klas i packagow konieczny
     }
 
 
 }
+
