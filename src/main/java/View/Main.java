@@ -18,7 +18,7 @@ public class Main extends Application {
         FXMLLoader fxmlGameOfLife = new FXMLLoader(getClass().getResource("gameOfLifeMain.fxml"));
         Parent root = fxmlGameOfLife.load();
         primaryStage.setTitle("Game of Life");
-        primaryStage.setScene(new Scene(root, 900, 650));
+        primaryStage.setScene(new Scene(root, 900, 675));
         Controller controller = fxmlGameOfLife.<Controller>getController();
         primaryStage.setResizable(false);
         primaryStage.show();

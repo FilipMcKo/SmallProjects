@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
@@ -38,19 +39,17 @@ public class Controller implements Initializable {
     @FXML
     private Model.Cell[][] cells = new Model.Cell[rows][columns];
     @FXML
-    private Model.Cell cello;
-    @FXML
     private Label nrOfGenerations;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         nrOfGenerations.setText("Generations: " + generations);
+       // gridPane.cons
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
-                cello = new Model.Cell();
-                gridPane.add(cello, j, i);
-                cells[i][j] = cello;
+                cells[i][j] =new Model.Cell();
+                gridPane.add(cells[i][j], j, i);
                 lifeHistory1[i][j] = true;
                 lifeHistory2[i][j] = false;
                 lifeHistory3[i][j] = j % 2 == 0;
@@ -121,7 +120,7 @@ public class Controller implements Initializable {
     public void loadSetupKey() {
         generations = 0;
         nrOfGenerations.setText("Generations: " + (generations));
-        life.getPreviousSetup(cells);
+        life.restorePreviousSetup(cells);
     }
 
     private void playGame() {

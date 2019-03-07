@@ -15,6 +15,10 @@ public class Cell extends StackPane {
     private boolean alive;
     private int aliveNeighbors;
 
+    Rectangle getRectangle(){
+        return this.rectangle;
+    }
+
     void setAlive(boolean alive) {
         this.alive = alive;
         if (alive) {
